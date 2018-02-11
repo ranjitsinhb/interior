@@ -1,0 +1,82 @@
+<div class="modal fade bd-example-modal-lg show" id="advanceSettings" tabindex="-1" role="dialog" style="display: block; padding-left: 17px;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="margin-top: 0px;">
+            <div class="modal-header">
+                <h5 class="modal-title">{{title}}</h5>
+                <button type="button" class="dismiss" data-dismiss="modal" (click)="closeModel();" #closeBtn>
+					<img src="/assets/images/close-icon.png" alt="Dismiss Modal">
+				</button>
+            </div>
+
+            <div class="modal-body p-0">
+                <form #formAdvanceSettings="ngForm" novalidate>
+
+
+                    <div class="view-history-call">
+                        <div class="row">
+
+                            <div class="col-sm-12 box-head">
+                                <div class="view-history-call1">
+                                    <h1 class="mt-1">{{amenityName}}</h1>
+                                    <!-- {{today | date:'medium'}} -->
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="view-history-call1">
+                                    <div class="form-field">
+                                        <label></label>
+                                        <div class="select-field">
+                                            <select class="form-control" #group="ngModel" [(ngModel)]="AdvancedSettingsModel.group" (change)="onFacilityGroupChange(AdvancedSettingsModel.group)" name="group">
+												<option *ngFor="let facility of uniqFacility" [value]="facility.group">
+													{{facility.group}}
+												</option>
+											</select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="view-history-call1">
+                                    <div class="row">
+                                        <div class="col-sm-4" *ngFor="let facilityObj of facilitydata.data">
+                                            <div class="form-field">
+                                                <div class="check-box">
+                                                    <input name="{{facilityObj.facilityId}}" [checked]="facilityObj.checked" type="checkbox" class="css-checkbox" id="{{facilityObj.facilityId}}" (change)="onFacilityChecked($event, facilityObj)">
+                                                    <label [attr.for]="facilityObj.facilityId" name="facilityObj.facilityId" class="css-label lite-green-check">{{facilityObj.facilityName}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-8">
+                                <div class="view-history-call1">
+                                    <div class="form-field">
+                                        <label>Add Notes</label>
+                                        <div class="textarea-field">
+                                            <textarea #notes="ngModel" name="notes" [(ngModel)]="AdvancedSettingsModel.notes" placeholder="Description"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-blue" (click)="closeModel();" data-dismiss="modal">
+					Cancel
+				</button>
+                <button type="button" class="btn btn-blue " (click)="confirm();" data-dismiss="modal">Submit</button>
+            </div>
+        </div>
+    </div>
+
+</div>
